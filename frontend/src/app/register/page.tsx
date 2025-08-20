@@ -42,8 +42,8 @@ export default function RegisterPage() {
 
     const endpoint =
       role === "customer"
-        ? "http://localhost:5000/api/customers/register"
-        : "http://localhost:5000/api/delivery/register";
+        ? "http://52.66.211.139:5000/api/customers/register"
+        : "http://52.66.211.139:5000/api/delivery/register";
 
     try {
       const res = await fetch(endpoint, {
