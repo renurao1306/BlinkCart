@@ -14,8 +14,8 @@ export default function UpdateStatusPage() {
     const orders = useSelector((state: RootState) => state.orders.orders);
     const dispatch = useDispatch<AppDispatch>();
 
-    const token = localStorage.getItem('token');
     useEffect(() => {
+        const token = localStorage.getItem('token');
         const fetchAssignedOrders = async () => {
             console.log('hello')
             try {

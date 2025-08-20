@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Truck } from "lucide-react";
-import { io } from "socket.io-client";
 
 interface User {
   _id: string;
@@ -39,7 +38,7 @@ export default function AllDeliveryPartners() {
                 const data = await res.json();
                 console.log("Fetched partners:", data)
                 setPartners(data)
-            } catch (err: any) {
+            } catch (err: unknown) {
                 console.error("Fetch error:", err);
             }
         }
