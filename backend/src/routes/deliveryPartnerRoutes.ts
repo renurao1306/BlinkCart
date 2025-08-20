@@ -88,7 +88,7 @@ router.get("/orders/unassigned", authMiddleware, async (req: Request, res: Respo
 router.post("/orders/accept/:orderId", authMiddleware, async (req: Request, res: Response) => {
   try {
     const partnerId = (req as any).user.id;
-    console.log('partnerId: ', partnerId);
+    console.log('partnerId: ', partnerId)
     const { orderId } = req.params;
 
     const order = await Order.findOneAndUpdate(

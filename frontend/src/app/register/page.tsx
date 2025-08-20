@@ -8,10 +8,30 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+type CustomerForm = {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  address: string;
+};
+
+type DeliveryForm = {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  vehicleNumber: string;
+};
+
+type FormData = CustomerForm | DeliveryForm;
+
+
 export default function RegisterPage() {
   const router = useRouter();
   const [role, setRole] = useState<"customer" | "delivery">("customer");
-  const [formData, setFormData] = useState<any>({});
+  const [formData, setFormData] = useState<FormData>({} as FormData);
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,7 +55,7 @@ export default function RegisterPage() {
       if (!res.ok) throw new Error("Registration failed");
 
       const data = await res.json();
-      console.log("✅ Registered:", data);
+      console.log("Registered:", data);
 
       if (data.token) {
         localStorage.setItem("token", data.token);
@@ -43,7 +63,7 @@ export default function RegisterPage() {
 
       router.push("/login");
     } catch (err) {
-      console.error("❌ Error:", err);
+      console.error("Error:", err);
       alert("Registration failed. Please try again.");
     }
   };
@@ -55,7 +75,11 @@ export default function RegisterPage() {
           <h1 className="text-2xl font-bold mb-4 text-center">Register</h1>
 
           <Label className="mb-2">Register As</Label>
-          <Select onValueChange={(val: any) => setRole(val as any)} defaultValue="customer">
+          <Select
+            onValueChange={(val: "customer" | "delivery") => setRole(val)}
+            defaultValue="customer"
+          >
+
             <SelectTrigger className="w-full mb-4">
               <SelectValue placeholder="Select role" />
             </SelectTrigger>

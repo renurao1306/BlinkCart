@@ -8,10 +8,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+type UserRole = "customer" | "delivery" | "admin";
+
+interface LoginForm {
+  email: string;
+  password: string;
+}
+
+
 export default function LoginPage() {
   const router = useRouter();
-  const [role, setRole] = useState<"customer" | "delivery" | "admin">("customer");
-  const [formData, setFormData] = useState<any>({});
+  const [role, setRole] = useState<UserRole>("customer");
+  const [formData, setFormData] = useState<LoginForm>({ email: "", password: "" });
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -67,7 +76,11 @@ export default function LoginPage() {
           <h1 className="text-2xl font-bold mb-4 text-center">Login</h1>
 
           <Label className="mb-2">Login As</Label>
-          <Select onValueChange={(val: any) => setRole(val as any)} defaultValue="customer">
+          <Select
+            onValueChange={(val: UserRole) => setRole(val)}
+            defaultValue="customer"
+          >
+
             <SelectTrigger className="w-full mb-4">
               <SelectValue placeholder="Select role" />
             </SelectTrigger>
