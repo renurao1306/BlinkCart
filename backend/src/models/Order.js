@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-import DeliveryPartner from "./DeliveryPartner.ts";
+const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
   customer: { type: mongoose.Schema.Types.ObjectId, ref: "Customer", required: true },
@@ -12,7 +11,7 @@ const orderSchema = new mongoose.Schema({
   ],
   totalAmount: { type: Number, required: true },
   deliveryAddress: { type: String, required: true },
-  deliveryPartner: { type: mongoose.Schema.Types.ObjectId, ref: "DeliveryPartner"},
+  deliveryPartner: { type: mongoose.Schema.Types.ObjectId, ref: "DeliveryPartner" },
   status: {
     type: String,
     enum: ["PLACED", "ACCEPTED", "PICKED_UP", "ON_THE_WAY", "DELIVERED"],
@@ -21,4 +20,4 @@ const orderSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-export default mongoose.model("Order", orderSchema);
+module.exports = mongoose.model("Order", orderSchema);

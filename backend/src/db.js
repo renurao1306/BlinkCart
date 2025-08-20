@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
-import { config } from "./config.ts";
+const mongoose = require("mongoose");
+const { config } = require("./config");
 
 async function connectDB() {
   await mongoose.connect(config.mongoUri);
   console.log("MongoDB connected");
 }
 
-export default connectDB
+module.exports = connectDB;

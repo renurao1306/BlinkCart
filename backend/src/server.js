@@ -1,12 +1,12 @@
-import express from "express";
-import http from "http";
-import cors from "cors";
-import { Server } from "socket.io";
-import dotenv from "dotenv";
-import connectDB from "./db.ts";
-import customerRoutes from "./routes/customerRoutes.ts";
-import deliveryPartnerRoutes from "./routes/deliveryPartnerRoutes.ts";
-import adminRoutes from "./routes/adminRoutes.ts";
+const express = require("express");
+const http = require("http");
+const cors = require("cors");
+const { Server } = require("socket.io");
+const dotenv = require("dotenv");
+const connectDB = require("./db");
+const customerRoutes = require("./routes/customerRoutes");
+const deliveryPartnerRoutes = require("./routes/deliveryPartnerRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 dotenv.config();
 
@@ -24,14 +24,13 @@ app.set("io", io);
 
 io.on("connection", (socket) => {
   console.log("New client connected:", socket.id);
-  socket.on("join", (customerId: string) => {
+  socket.on("join", (customerId) => {
     socket.join(customerId);
     console.log(`Customer ${customerId} joined room`);
   });
   socket.on("order_update", (order) => {
     console.log("Order updated:", order);
   });
-
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
@@ -44,17 +43,15 @@ connectDB();
 app.get("/api/hello", (req, res) => {
   res.json({ message: "Hello World" });
 });
-
 app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
-
 app.use("/api/customers", customerRoutes);
 app.use("/api/delivery", deliveryPartnerRoutes);
 app.use("/api/admin", adminRoutes);
 
 // Error handler
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: "Something went wrong!" });
 });
