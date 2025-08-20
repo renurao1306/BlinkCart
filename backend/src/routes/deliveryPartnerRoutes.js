@@ -120,16 +120,17 @@ router.post("/orders/status/:orderId", authMiddleware, async (req, res) => {
 router.get("/orders/assigned", authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
-    // Find delivery partner profile
     const partner = await DeliveryPartner.findOne({ user: userId });
+    
     if (!partner) {
       return res.status(404).json({ error: "Delivery Partner not found" });
     }
-    // Fetch assigned orders
+    
     const orders = await Order.find({
       deliveryPartner: partner.user,
       status: { $in: ["ACCEPTED", "PICKED_UP", "ON_THE_WAY", "DELIVERED"] },
     }).populate("customer", "name email phone");
+    
     res.json(orders);
   } catch (error) {
     res.status(500).json({ error: error.message });

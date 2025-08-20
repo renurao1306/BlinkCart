@@ -14,11 +14,12 @@ export default function UpdateStatusPage() {
     const orders = useSelector((state: RootState) => state.orders.orders);
     const dispatch = useDispatch<AppDispatch>();
 
+    const token = localStorage.getItem('token');
     useEffect(() => {
         const fetchAssignedOrders = async () => {
-            const token = localStorage.getItem('token');
+            console.log('hello')
             try {
-                const res = await fetch("http://52.66.211.139:5000/api/delivery/orders/assigned", {
+                const res = await fetch("http://localhost:5000/api/delivery/orders/assigned", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -26,8 +27,9 @@ export default function UpdateStatusPage() {
                     }
                 });
                 if (!res.ok) throw new Error("Failed to fetch assigned orders");
-
+                
                 const data = await res.json();
+                console.log(data)
                 dispatch(setOrders(data));
             } catch (err) {
                 console.error("Error fetching assigned orders:", err);
@@ -66,7 +68,7 @@ export default function UpdateStatusPage() {
         const token = localStorage.getItem("token");
 
         try {
-            const res = await fetch(`http://52.66.211.139:5000/api/delivery/orders/status/${id}`, {
+            const res = await fetch(`http://localhost:5000/api/delivery/orders/status/${id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -31,7 +31,7 @@ export default function CartPage() {
     useEffect(() => {
         async function fetchProducts() {
             try {
-                const res = await fetch("http://52.66.211.139:5000/api/customers/products");
+                const res = await fetch("http://localhost:5000/api/customers/products");
                 const data = await res.json();
                 setProducts(data);
             } catch (err) {
@@ -80,7 +80,7 @@ export default function CartPage() {
 
         try {
             const token = localStorage.getItem("token");
-            const res = await fetch("http://52.66.211.139:5000/api/customers/order", {
+            const res = await fetch("http://localhost:5000/api/customers/order", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

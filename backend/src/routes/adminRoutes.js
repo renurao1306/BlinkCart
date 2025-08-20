@@ -1,6 +1,7 @@
 const express = require("express");
 const Admin = require("../models/Admin");
 const Order = require("../models/Order");
+const DeliveryPartner = require("../models/DeliveryPartner");
 const { authMiddleware } = require("../middleware/authMiddleware");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
@@ -70,12 +71,30 @@ router.get("/all-orders", authMiddleware, async (req, res) => {
       return res.status(403).json({ message: "Forbidden" });
     }
     const orders = await Order.find()
-      .populate("customer", "name email")
-      .populate("deliveryPartner", "name phone");
+    .populate("customer", "name email")
+    .populate("deliveryPartner", "name phone")
+      
     res.json(orders);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+
+// View All Delivery Partners
+router.get("/all-deliveryPartners", authMiddleware, async (req, res) => {
+  try {
+    if (!req.user || req.user.role !== "admin") {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+
+    const deliveryPartners = await DeliveryPartner.find()
+    .populate("user", "name phone");
+
+    res.json(deliveryPartners);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 module.exports = router;
