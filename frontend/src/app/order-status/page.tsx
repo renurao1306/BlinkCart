@@ -22,7 +22,7 @@ interface Order {
   createdAt: string;
 }
 
-const socket = io("http://localhost:5000", { transports: ["websocket"] });
+const socket = io("http://35.154.71.3:5000", { transports: ["websocket"] });
 
 export default function OrderStatusPage() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -34,7 +34,7 @@ export default function OrderStatusPage() {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch("http://localhost:5000/api/customers/orders", {
+        const res = await fetch("http://35.154.71.3:5000/api/customers/orders", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

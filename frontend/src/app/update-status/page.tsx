@@ -19,7 +19,7 @@ export default function UpdateStatusPage() {
         const fetchAssignedOrders = async () => {
             console.log('hello')
             try {
-                const res = await fetch("http://localhost:5000/api/delivery/orders/assigned", {
+                const res = await fetch("http://35.154.71.3:5000/api/delivery/orders/assigned", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export default function UpdateStatusPage() {
         const token = localStorage.getItem("token");
 
         try {
-            const res = await fetch(`http://localhost:5000/api/delivery/orders/status/${id}`, {
+            const res = await fetch(`http://35.154.71.3:5000/api/delivery/orders/status/${id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
