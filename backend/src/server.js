@@ -58,5 +58,5 @@ app.use((err, req, res, next) => {
 
 // Start server
 server.listen(process.env.PORT, () => {
-  console.log(`Backend running on http://35.154.71.3:${process.env.PORT}`);
+  console.log(`Backend running on http://43.205.203.2:${process.env.PORT}`);
 });

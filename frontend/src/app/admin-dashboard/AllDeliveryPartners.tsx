@@ -25,7 +25,7 @@ export default function AllDeliveryPartners() {
         const fetchPartners = async () => {
             try {
                 const token = localStorage.getItem("token")
-                const res = await fetch("http://35.154.71.3:5000/api/admin/all-deliveryPartners", {
+                const res = await fetch("http://43.205.203.2:5000/api/admin/all-deliveryPartners", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

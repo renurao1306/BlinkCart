@@ -31,11 +31,11 @@ export default function LoginPage() {
 
     let endpoint = "";
     if (role === "customer") {
-      endpoint = "http://35.154.71.3:5000/api/customers/login";
+      endpoint = "http://43.205.203.2:5000/api/customers/login";
     } else if (role === "delivery") {
-      endpoint = "http://35.154.71.3:5000/api/delivery/login";
+      endpoint = "http://43.205.203.2:5000/api/delivery/login";
     } else if (role === "admin") {
-      endpoint = "http://35.154.71.3:5000/api/admin/login";
+      endpoint = "http://43.205.203.2:5000/api/admin/login";
     }
 
     try {

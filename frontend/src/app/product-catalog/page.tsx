@@ -35,7 +35,7 @@ export default function ProductCatalog() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://35.154.71.3:5000/api/customers/products");
+        const res = await fetch("http://43.205.203.2:5000/api/customers/products");
         const data = await res.json();
         setProducts(data);
       } catch (error) {

@@ -26,7 +26,7 @@ export default function UnassignedOrders() {
         const fetchOrders = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const res = await fetch("http://35.154.71.3:5000/api/delivery/orders/unassigned", {
+                const res = await fetch("http://43.205.203.2:5000/api/delivery/orders/unassigned", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -55,7 +55,7 @@ export default function UnassignedOrders() {
     const handleAcceptOrder = async (id: string) => {
         try {
             const token = localStorage.getItem("token");
-            const res = await fetch(`http://35.154.71.3:5000/api/delivery/orders/accept/${id}`, {
+            const res = await fetch(`http://43.205.203.2:5000/api/delivery/orders/accept/${id}`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,

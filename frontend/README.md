@@ -14,7 +14,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://35.154.71.3:3000](http://35.154.71.3:3000) with your browser to see the result.
+Open [http://43.205.203.2:3000](http://43.205.203.2:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

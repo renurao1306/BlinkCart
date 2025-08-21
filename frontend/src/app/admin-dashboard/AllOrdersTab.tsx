@@ -27,7 +27,7 @@ interface Order {
     createdAt: string
 }
 
-const socket = io("http://35.154.71.3:5000", { transports: ["websocket"] });
+const socket = io("http://43.205.203.2:5000", { transports: ["websocket"] });
 
 export default function AllOrdersTab() {
     const [orders, setOrders] = useState<Order[]>([]);
@@ -36,7 +36,7 @@ export default function AllOrdersTab() {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const res = await fetch("http://35.154.71.3:5000/api/admin/all-orders", {
+                const res = await fetch("http://43.205.203.2:5000/api/admin/all-orders", {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                         "Content-Type": "application/json",
