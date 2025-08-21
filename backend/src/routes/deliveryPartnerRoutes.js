@@ -109,6 +109,7 @@ router.post("/orders/status/:orderId", authMiddleware, async (req, res) => {
     );
     if (!order) return res.status(404).json({ error: "Order not found" });
     req.app.get("io").to(order.customer.toString()).emit("order_update", order);
+    req.app.get("io").to("admin").emit("order_update", order);
     console.log('Emitted to order_update room');
     res.json(order);
   } catch (error) {
@@ -120,16 +121,13 @@ router.post("/orders/status/:orderId", authMiddleware, async (req, res) => {
 router.get("/orders/assigned", authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
-    const partner = await DeliveryPartner.findOne({ user: userId });
-    
-    if (!partner) {
-      return res.status(404).json({ error: "Delivery Partner not found" });
-    }
+    console.log('userId', userId);
     
     const orders = await Order.find({
-      deliveryPartner: partner.user,
+      deliveryPartner: userId,
       status: { $in: ["ACCEPTED", "PICKED_UP", "ON_THE_WAY", "DELIVERED"] },
     }).populate("customer", "name email phone");
+    console.log('orders', orders)
     
     res.json(orders);
   } catch (error) {

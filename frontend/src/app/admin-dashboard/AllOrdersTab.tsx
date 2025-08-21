@@ -45,9 +45,11 @@ export default function AllOrdersTab() {
 
                 const data = await res.json();
                 setOrders(data);
+                console.log('Orders revd are: ', orders)
+                console.log('data[0].cust: ', data[0].customer);
 
                 if (!hasJoined.current && data.length > 0) {
-                    socket.emit("join", data[0].customer);
+                    socket.emit("join_admin");
                     hasJoined.current = true;
                 }
             } catch (err) {
@@ -56,26 +58,16 @@ export default function AllOrdersTab() {
         };
 
         fetchOrders();
+
+        socket.on("order_update", (updatedOrder: Order) => {
+            console.log("Order update received:", updatedOrder);
+            setOrders((prev) =>
+                prev.map((order) =>
+                    order._id === updatedOrder._id ? { ...order, status: updatedOrder.status } : order
+                )
+            );
+        });
     }, []);
-
-    // useEffect(() => {
-    //     socket.on("connect", () => {
-    //         console.log("Socket connected:", socket.id);
-    //     });
-
-    //     socket.on("order_update", (updatedOrder: Order) => {
-    //         console.log("Order update received:", updatedOrder);
-    //         setOrders((prev) =>
-    //             prev.map((order) =>
-    //                 order._id === updatedOrder._id ? { ...order, ...updatedOrder } : order
-    //             )
-    //         );
-    //     });
-
-    //     return () => {
-    //         socket.off("order_update");
-    //     };
-    // }, []);
 
 
     return (

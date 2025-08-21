@@ -28,6 +28,10 @@ io.on("connection", (socket) => {
     socket.join(customerId);
     console.log(`Customer ${customerId} joined room`);
   });
+  socket.on("join_admin", () => {
+    socket.join("admin");
+    console.log(`Admin ${socket.id} joined admin room`);
+  });
   socket.on("order_update", (order) => {
     console.log("Order updated:", order);
   });
