@@ -45,9 +45,7 @@ export default function AllOrdersTab() {
 
                 const data = await res.json();
                 setOrders(data);
-                console.log('Orders revd are: ', orders)
-                console.log('data[0].cust: ', data[0].customer);
-
+                
                 if (!hasJoined.current && data.length > 0) {
                     socket.emit("join_admin");
                     hasJoined.current = true;
